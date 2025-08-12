@@ -6,12 +6,31 @@
 
 Si haces clic en el botón anterior, Netlify creará un nuevo repo a partir de este template y quedará listo para desplegar.
 
-### Conectar Supabase (botón rápido)
+### Conectar Supabase (paso a paso)
 
-[![Connect Supabase on Netlify](https://img.shields.io/badge/Connect%20Supabase-00C4B3?logo=supabase&logoColor=white)](https://app.netlify.com/integrations/supabase)
+Supabase es una plataforma open-source con Postgres, Auth, Storage, realtime y GraphQL.
 
-- Abre el enlace, pulsa "Install/Connect" y selecciona tu sitio (p. ej. `austrik.netlify.app`).
-- El vínculo directo de autorización que muestra Netlify (similar a `https://supabase.com/dashboard/authorize?auth_id=...`) es temporal y específico de tu sesión; por eso este botón apunta a la página oficial de la integración de Supabase en Netlify.
+Ventajas de la integración en Netlify:
+- Autenticación por OAuth con tu cuenta de Supabase
+- Selección del proyecto Supabase a vincular
+- Creación automática de variables de entorno:
+  - `SUPABASE_DATABASE_URL`
+  - `SUPABASE_SERVICE_ROLE_KEY`
+  - `SUPABASE_ANON_KEY`
+- Compatibilidad por framework (o prefijo custom)
+
+Pasos para conectar tu sitio en Netlify con Supabase:
+1. Entra en Netlify → Team → Extensions.
+2. Busca “Supabase” y pulsa Install.
+3. Desde tu lista de Sites, abre tu sitio (por ej. `austrik.netlify.app`).
+4. Ve a Project configuration → General → Supabase.
+5. Pulsa “Connect” y autoriza con tu cuenta de Supabase.
+6. Elige tu proyecto de Supabase y framework/prefijo adecuado.
+7. Guarda. La integración creará variables en Project configuration → Environment variables.
+
+Notas:
+- La autorización directa `https://supabase.com/dashboard/authorize?auth_id=...` es temporal por sesión, por eso no se incluye botón directo.
+- Si no usas la integración, define manualmente las variables `PUBLIC_SUPABASE_URL` y `PUBLIC_SUPABASE_ANON_KEY` (o sus equivalentes `SUPABASE_*`).
 
 ## Entorno
 
