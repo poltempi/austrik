@@ -10,7 +10,13 @@ if (!slug) {
 
 Astro.response.headers.set('Cache-Control', 'no-store, max-age=0');
 
-const post = await fetchPostBySlug(slug);
+let post = null as Awaited<ReturnType<typeof fetchPostBySlug>>;
+try {
+  post = await fetchPostBySlug(slug);
+} catch (e) {
+  console.error('Post fetch error:', e);
+  post = null;
+}
 
 if (!post) {
   return new Response('Not Found', { status: 404 });

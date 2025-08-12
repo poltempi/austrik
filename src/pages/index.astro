@@ -4,7 +4,13 @@ import { fetchAllPosts } from "../services/posts";
 
 Astro.response.headers.set('Cache-Control', 'no-store, max-age=0');
 
-const posts = await fetchAllPosts();
+let posts = [] as Awaited<ReturnType<typeof fetchAllPosts>>;
+try {
+  posts = await fetchAllPosts();
+} catch (e) {
+  console.error('Home fetchAllPosts error:', e);
+  posts = [];
+}
 ---
 
 <BaseLayout title="Austrik Blog" description="Noticias y artículos de Austrik">

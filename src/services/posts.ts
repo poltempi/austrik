@@ -17,6 +17,9 @@ export type BlogPostSummary = Pick<BlogPost, 'id' | 'slug' | 'title' | 'excerpt'
 export async function fetchAllPosts(): Promise<BlogPostSummary[]> {
   try {
     const supabase = getSupabaseClient();
+    if (!supabase) {
+      return [];
+    }
     const { data, error }: PostgrestSingleResponse<BlogPost[]> = await supabase
       .from('posts')
       .select('id, slug, title, excerpt, published_at, cover_image_url')
@@ -36,6 +39,9 @@ export async function fetchAllPosts(): Promise<BlogPostSummary[]> {
 export async function fetchPostBySlug(slug: string): Promise<BlogPost & { content_html: string } | null> {
   try {
     const supabase = getSupabaseClient();
+    if (!supabase) {
+      return null;
+    }
     const { data, error }: PostgrestSingleResponse<BlogPost[]> = await supabase
       .from('posts')
       .select('*')
