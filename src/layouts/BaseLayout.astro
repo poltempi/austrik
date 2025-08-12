@@ -1,0 +1,31 @@
+---
+const { title = 'Austrik', description = 'Blog', image = '/favicon.svg' } = Astro.props;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+  </head>
+  <body style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji; margin: 0;">
+    <header style="padding: 1rem 1.25rem; border-bottom: 1px solid #e5e7eb;">
+      <a href="/" style="text-decoration: none; color: inherit;"><strong>Austrik</strong></a>
+    </header>
+    <main style="padding: 1.25rem; max-width: 900px; margin: 0 auto;">
+      <slot />
+    </main>
+    <footer style="padding: 1rem 1.25rem; border-top: 1px solid #e5e7eb; color: #6b7280;">
+      © {new Date().getFullYear()} Austrik
+    </footer>
+  </body>
+  
+</html>
+
+
