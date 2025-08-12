@@ -15,35 +15,47 @@ export type BlogPost = {
 export type BlogPostSummary = Pick<BlogPost, 'id' | 'slug' | 'title' | 'excerpt' | 'published_at' | 'cover_image_url'>;
 
 export async function fetchAllPosts(): Promise<BlogPostSummary[]> {
-  const supabase = getSupabaseClient();
-  const { data, error }: PostgrestSingleResponse<BlogPost[]> = await supabase
-    .from('posts')
-    .select('id, slug, title, excerpt, published_at, cover_image_url')
-    .order('published_at', { ascending: false });
+  try {
+    const supabase = getSupabaseClient();
+    const { data, error }: PostgrestSingleResponse<BlogPost[]> = await supabase
+      .from('posts')
+      .select('id, slug, title, excerpt, published_at, cover_image_url')
+      .order('published_at', { ascending: false });
 
-  if (error) {
-    throw new Error(`Error fetching posts: ${error.message}`);
+    if (error) {
+      console.error('Supabase error (fetchAllPosts):', error.message);
+      return [];
+    }
+    return data ?? [];
+  } catch (err) {
+    console.error('fetchAllPosts failed:', err);
+    return [];
   }
-  return data ?? [];
 }
 
 export async function fetchPostBySlug(slug: string): Promise<BlogPost & { content_html: string } | null> {
-  const supabase = getSupabaseClient();
-  const { data, error }: PostgrestSingleResponse<BlogPost[]> = await supabase
-    .from('posts')
-    .select('*')
-    .eq('slug', slug)
-    .limit(1);
+  try {
+    const supabase = getSupabaseClient();
+    const { data, error }: PostgrestSingleResponse<BlogPost[]> = await supabase
+      .from('posts')
+      .select('*')
+      .eq('slug', slug)
+      .limit(1);
 
-  if (error) {
-    throw new Error(`Error fetching post: ${error.message}`);
+    if (error) {
+      console.error('Supabase error (fetchPostBySlug):', error.message);
+      return null;
+    }
+
+    const post = data?.[0];
+    if (!post) return null;
+
+    const content_html = marked.parse(post.content_md ?? '');
+    return { ...post, content_html };
+  } catch (err) {
+    console.error('fetchPostBySlug failed:', err);
+    return null;
   }
-
-  const post = data?.[0];
-  if (!post) return null;
-
-  const content_html = marked.parse(post.content_md ?? '');
-  return { ...post, content_html };
 }
 
 
