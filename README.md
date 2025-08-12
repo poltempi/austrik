@@ -6,6 +6,13 @@
 
 Si haces clic en el botón anterior, Netlify creará un nuevo repo a partir de este template y quedará listo para desplegar.
 
+### Conectar Supabase (botón rápido)
+
+[![Connect Supabase on Netlify](https://img.shields.io/badge/Connect%20Supabase-00C4B3?logo=supabase&logoColor=white)](https://app.netlify.com/integrations/supabase)
+
+- Abre el enlace, pulsa "Install/Connect" y selecciona tu sitio (p. ej. `austrik.netlify.app`).
+- El vínculo directo de autorización que muestra Netlify (similar a `https://supabase.com/dashboard/authorize?auth_id=...`) es temporal y específico de tu sesión; por eso este botón apunta a la página oficial de la integración de Supabase en Netlify.
+
 ## Entorno
 
 1. Copia `.env.example` a `.env` y rellena:
