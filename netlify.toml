@@ -1,11 +1,6 @@
 [build]
   command = "npm run build"
   publish = "dist"
-
-[[edge_functions]]
-  path = "/posts/*"
-  function = "server"
-
 [functions]
   node_bundler = "esbuild"
   included_files = ["dist/**"]
