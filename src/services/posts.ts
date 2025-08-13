@@ -11,6 +11,7 @@ export type BlogPost = {
   published_at: string | null;
   cover_image_url: string | null;
   category_id?: string | null;
+  category_name?: string | null;
 };
 
 export type BlogPostSummary = Pick<BlogPost, 'id' | 'slug' | 'title' | 'excerpt' | 'published_at' | 'cover_image_url'>;
@@ -23,7 +24,7 @@ export async function fetchAllPosts(): Promise<BlogPostSummary[]> {
     }
     const { data, error }: PostgrestSingleResponse<BlogPost[]> = await supabase
       .from('posts')
-      .select('id, slug, title, excerpt, published_at, cover_image_url, category_id')
+      .select('id, slug, title, excerpt, published_at, cover_image_url, category_id, category_name')
       .order('published_at', { ascending: false });
 
     if (error) {
@@ -96,9 +97,28 @@ export async function fetchPostsByCategoryId(categoryId: string): Promise<BlogPo
     if (!supabase) return [];
     const { data, error } = await supabase
       .from('posts')
-      .select('id, slug, title, excerpt, published_at, cover_image_url, category_id')
+      .select('id, slug, title, excerpt, published_at, cover_image_url, category_id, category_name')
       .eq('category_id', categoryId)
       .order('published_at', { ascending: false });
+export async function fetchPostsByCategoryName(categoryName: string): Promise<BlogPostSummary[]> {
+  try {
+    const supabase = getSupabaseClient();
+    if (!supabase) return [];
+    const { data, error } = await supabase
+      .from('posts')
+      .select('id, slug, title, excerpt, published_at, cover_image_url, category_name')
+      .eq('category_name', categoryName)
+      .order('published_at', { ascending: false });
+    if (error) {
+      console.error('Supabase error (fetchPostsByCategoryName):', error.message);
+      return [];
+    }
+    return (data ?? []).map((p: any) => ({ ...p, cover_image_url: p.cover_image_url || '/demo-cover.svg' }));
+  } catch (e) {
+    console.error('fetchPostsByCategoryName failed:', e);
+    return [];
+  }
+}
     if (error) {
       console.error('Supabase error (fetchPostsByCategoryId):', error.message);
       return [];

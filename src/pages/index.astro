@@ -37,7 +37,7 @@ try {
                   <figure>
                     <img src={main.cover_image_url ?? '/demo-cover.svg'} alt={main.title} loading="eager" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
                     <figcaption>
-                      <span class="badge">{catMap.get((main as any).category_id || '') ?? 'GENERAL'}</span>
+                    <span class="badge">{(main as any).category_name || catMap.get((main as any).category_id || '') || 'GENERAL'}</span>
                       <h2>{main.title}</h2>
                       {main.published_at && (
                         <small class="meta">{new Date(main.published_at).toLocaleDateString('es')}</small>
@@ -52,7 +52,7 @@ try {
                   <figure>
                     <img src={sideLarge.cover_image_url ?? '/demo-cover.svg'} alt={sideLarge.title} loading="lazy" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
                     <figcaption>
-                      <span class="badge">{catMap.get((sideLarge as any).category_id || '') ?? 'GENERAL'}</span>
+                    <span class="badge">{(sideLarge as any).category_name || catMap.get((sideLarge as any).category_id || '') || 'GENERAL'}</span>
                       <h3>{sideLarge.title}</h3>
                         {sideLarge.published_at && (
                           <small class="meta">{new Date(sideLarge.published_at).toLocaleDateString('es')}</small>
@@ -67,7 +67,7 @@ try {
                       <figure>
                         <img src={smallA.cover_image_url ?? '/demo-cover.svg'} alt={smallA.title} loading="lazy" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
                         <figcaption>
-                          <span class="badge">{catMap.get((smallA as any).category_id || '') ?? 'GENERAL'}</span>
+                          <span class="badge">{(smallA as any).category_name || catMap.get((smallA as any).category_id || '') || 'GENERAL'}</span>
                           <h4>{smallA.title}</h4>
                           {smallA.published_at && (
                             <small class="meta">{new Date(smallA.published_at).toLocaleDateString('es')}</small>
@@ -114,7 +114,7 @@ try {
                 <figure>
                   <img src={p.cover_image_url ?? '/demo-cover.svg'} alt={p.title} loading="lazy" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
                   <div class="caption">
-                    <span class="badge">{catMap.get((p as any).category_id || '') ?? 'General'}</span>
+                    <span class="badge">{(p as any).category_name || catMap.get((p as any).category_id || '') || 'General'}</span>
                     <h4 class="title">{p.title}</h4>
                     {p.published_at && (
                       <small class="meta">{new Date(p.published_at).toLocaleDateString('es')}</small>

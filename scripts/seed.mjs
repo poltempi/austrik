@@ -144,7 +144,7 @@ async function main() {
   const posts = buildPosts();
   const postsWithCategory = posts.map((p) => {
     const isHealth = /(blepharoplasty|pdo|laser eye|macular|osteoporosis|carcinoma|alzheimer|stomach cancer|prostate|gout)/i.test(p.title);
-    return { ...p, category_id: isHealth ? healthId : mindsetId };
+    return { ...p, category_id: isHealth ? healthId : mindsetId, category_name: isHealth ? 'Health' : 'Mindset' };
   });
   const { error, count } = await supabase
     .from('posts')

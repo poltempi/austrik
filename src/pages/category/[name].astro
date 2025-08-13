@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { fetchCategories, fetchPostsByCategoryId } from "../../services/posts";
+import { fetchCategories, fetchPostsByCategoryId, fetchPostsByCategoryName } from "../../services/posts";
 
 const { name } = Astro.params;
 if (!name) {
@@ -14,7 +14,10 @@ const category = categories.find((c) => c.name.toLowerCase() === String(name).to
 if (!category) {
   return new Response('Not Found', { status: 404 });
 }
-const posts = await fetchPostsByCategoryId(category.id);
+let posts = await fetchPostsByCategoryId(category.id);
+if (!posts || posts.length === 0) {
+  posts = await fetchPostsByCategoryName(category.name);
+}
 ---
 
 <BaseLayout title={`${category.name} · Austrik`} description={category.description}>
