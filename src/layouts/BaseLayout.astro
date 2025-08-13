@@ -13,12 +13,60 @@ const { title = 'Austrik', description = 'Blog', image = '/favicon.svg', categor
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
+    <style is:global>
+      /* Shared badge style (glass/liquid) */
+      .badge {
+        display: inline-block;
+        margin: 0;
+        padding: .25rem .6rem;
+        border-radius: 0;
+        background: rgb(232 231 231 / 36%);
+        color: #ffffff;
+        font-size: .75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        line-height: 1;
+      }
+
+      /* Shared post grid and card styles (used across home, hero, latest, category) */
+      .post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+      .post-card, .card-grid { text-decoration: none; color: inherit; }
+      .post-card figure, .card-grid figure { margin: 0; border: none; border-radius: 0; overflow: hidden; position: relative; }
+      .post-card img, .card-grid img { width: 100%; height: 200px; object-fit: cover; display: block; }
+      .post-card .caption, .card-grid figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.5rem; color: #fff; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%); }
+      .post-card .title, .card-grid h4 { margin: 1rem 0 .5rem 0; font-size: 1.1rem; line-height: 1.3; font-weight: 600; }
+      .post-card .meta, .card-grid .meta { color: #d1d5db; font-size: .85rem; }
+      @media (max-width: 900px) {
+        .post-grid { grid-template-columns: 1fr; }
+        .tc-container { padding: .6rem 1rem; justify-content: space-between; }
+        .tc { position: relative; }
+        .hamburger { display: block; }
+        .tc-nav { display: block; visibility: hidden; opacity: 0; pointer-events: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #1f2421; border-top: 1px solid #2b2f2c; padding: .75rem 1rem; z-index: 1000; transform: translateY(-4px); transition: opacity .18s ease, transform .18s ease; }
+        .tc-nav.active { display: block !important; visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); }
+        .tc-nav .item { display:block; padding: 0.85rem 0; border-bottom: 1px solid #2b2f2c; }
+        .tc-nav .item:last-child { border-bottom: none; }
+        main { padding: 0.5rem !important; }
+        .post-card img, .card-grid img { height: 250px; }
+      }
+      .hamburger { display: none; background: none; border: none; color: #fff; cursor: pointer; padding: 0.25rem; width: 34px; height: 26px; position: relative; z-index: 1101; }
+      .hamburger .bar { position: absolute; left: 0; right: 0; height: 3px; background: #fff; border-radius: 2px; transition: transform .2s ease, opacity .2s ease; }
+      .hamburger .bar:nth-child(1) { top: 0; }
+      .hamburger .bar:nth-child(2) { top: 11px; }
+      .hamburger .bar:nth-child(3) { bottom: 0; }
+      @media (max-width: 900px) { .hamburger { display: block; } }
+    </style>
   </head>
   <body style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji; margin: 0;">
     <header class="tc">
       <div class="tc-container">
         <a class="logo" href="/">Austrik</a>
-        <nav class="tc-nav">
+        <button id="hamburgerBtn" class="hamburger" aria-label="Abrir menú">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        <nav class="tc-nav" id="mobileNav" aria-hidden="true">
           <a href="/latest" class="item">Latest</a>
           {Array.isArray(categories) && categories.length > 0 && (
             <>
@@ -33,17 +81,88 @@ const { title = 'Austrik', description = 'Blog', image = '/favicon.svg', categor
         .tc { background:#1f2421; border-bottom:1px solid #2b2f2c; }
         .tc-container { max-width:85rem; margin:0 auto; padding:.6rem 1rem; display:flex; align-items:center; gap:2rem; }
         .logo { color:#fff; text-decoration:none; font-weight:800; letter-spacing:.2px; }
-        .tc-nav { display:flex; gap:1rem; flex-wrap:wrap; }
+        .tc-nav { display:none; gap:1rem; flex-wrap:wrap; }
         .tc-nav .item { color:#e5e7eb; text-decoration:none; font-weight:600; font-size:.95rem; }
         .tc-nav .item:hover { color:#fff; }
+        @media (min-width: 901px) {
+          .tc-nav { display:flex; }
+        }
       </style>
     </header>
-    <main style="padding: 1.25rem; max-width: 85rem; margin: 0 auto;">
+    <main style="padding: 1rem; max-width: 85rem; margin: 0 auto;">
       <slot />
     </main>
-    <footer style="padding: 1rem 1.25rem; border-top: 1px solid #e5e7eb; color: #6b7280;">
-      © {new Date().getFullYear()} Austrik
+    <footer class="ft">
+      <div class="ft-container">
+        <div class="ft-copy">© {new Date().getFullYear()} Austrik</div>
+        <nav class="ft-nav">
+          <a class="item" href="/about">About Us</a>
+          <a class="item" href="/contact">Contact</a>
+          <a class="item" href="/do-not-sell">Don’t sell my personal information</a>
+          <a class="item" href="/privacy">Privacy Policy</a>
+          <a class="item" href="/terms">Terms & Conditions</a>
+        </nav>
+      </div>
+      <style>
+        .ft { padding: 1rem 1.25rem; border-top: 1px solid #e5e7eb; color: #6b7280; }
+        .ft-container { max-width:85rem; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:.75rem; }
+        .ft-copy { white-space: nowrap; }
+        .ft-nav { display:flex; gap:1rem; flex-wrap:wrap; }
+        .ft-nav .item { color:#6b7280; text-decoration:none; font-size:.9rem; }
+        .ft-nav .item:hover { color:#111827; }
+        @media (max-width: 900px) {
+          .ft-container { flex-direction: column; align-items: flex-start; gap:.5rem; }
+          .ft-nav { flex-direction: column; gap:.35rem; }
+        }
+      </style>
     </footer>
+    
+    <script>
+      function toggleMenu() {
+        var nav = document.getElementById('mobileNav');
+        if (!nav) return;
+        if (nav.classList.contains('active')) {
+          nav.classList.remove('active');
+          nav.setAttribute('aria-hidden', 'true');
+        } else {
+          nav.classList.add('active');
+          nav.setAttribute('aria-hidden', 'false');
+        }
+      }
+      
+      // Close menu when clicking outside or on links
+      document.addEventListener('DOMContentLoaded', function() {
+        const nav = document.getElementById('mobileNav');
+        const hamburger = document.getElementById('hamburgerBtn');
+        
+        if (nav && hamburger) {
+          // Toggle on hamburger click (avoid inline handlers)
+          hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMenu();
+          });
+
+          // Close menu when clicking outside
+          document.addEventListener('click', function(event) {
+            var target = event.target;
+            if (!nav.contains(target) && !hamburger.contains(target)) {
+              nav.classList.remove('active');
+              nav.setAttribute('aria-hidden', 'true');
+            }
+          });
+          
+          // Close menu when clicking on nav links
+          nav.addEventListener('click', function(event) {
+            var target = event.target;
+            // Close when clicking anywhere inside nav (simpler UX on mobile)
+            if (target.tagName === 'A' || target.classList && target.classList.contains('item')) {
+              nav.classList.remove('active');
+              nav.setAttribute('aria-hidden', 'true');
+            }
+          });
+        }
+      });
+    </script>
   </body>
   
 </html>

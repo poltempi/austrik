@@ -1,23 +1,18 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import { fetchCategories, fetchPostsByCategoryId } from "../../services/posts";
-
-const { name } = Astro.params;
-if (!name) {
-  return Astro.redirect('/', 302);
-}
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { fetchCategories, fetchPostsByCategoryId } from "../services/posts";
 
 Astro.response.headers.set('Cache-Control', 'no-store, max-age=0');
 
 const categories = await fetchCategories();
-const category = categories.find((c) => c.name.toLowerCase() === String(name).toLowerCase()) ?? null;
+const category = categories.find((c) => c.name.toLowerCase() === 'health') ?? null;
 if (!category) {
   return new Response('Not Found', { status: 404 });
 }
 const posts = await fetchPostsByCategoryId(category.id);
 ---
 
-<BaseLayout title={`${category.name} · Austrik`} description={category.description}>
+<BaseLayout title={`Health · Austrik`} description={category.description}>
   <h1 style="margin-top:0">{category.name}</h1>
   <p style="color:#4b5563; margin-top:.25rem;">{category.description}</p>
 
