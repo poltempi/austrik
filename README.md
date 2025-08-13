@@ -1,5 +1,7 @@
 # Austrik Blog (Astro + Supabase + Netlify)
 
+Demo: https://austrik.netlify.app/
+
 ## Deploy to Netlify
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/poltempi/austrik)
@@ -30,15 +32,15 @@ Pasos para conectar tu sitio en Netlify con Supabase:
 
 Notas:
 - La autorización directa `https://supabase.com/dashboard/authorize?auth_id=...` es temporal por sesión, por eso no se incluye botón directo.
-- Si no usas la integración, define manualmente las variables `PUBLIC_SUPABASE_URL` y `PUBLIC_SUPABASE_ANON_KEY` (o sus equivalentes `SUPABASE_*`).
+- Si no usas la integración, define manualmente las variables `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` (también se admiten `PUBLIC_SUPABASE_*`).
 
 ## Entorno
 
-1. Copia `.env.example` a `.env` y rellena:
+1. Crea un archivo `.env` y rellena:
 
 ```
-PUBLIC_SUPABASE_URL=...
-PUBLIC_SUPABASE_ANON_KEY=...
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 ```
 
 2. Instala dependencias y arranca desarrollo:
@@ -66,9 +68,9 @@ Los cambios Google Sheets → Make → Supabase se reflejan automáticamente en 
 
 ## Deploy en Netlify
 
-1. Conecta el repo y define variables:
-   - `PUBLIC_SUPABASE_URL`
-   - `PUBLIC_SUPABASE_ANON_KEY`
+1. Conecta el repo y define variables (scope Build & Functions):
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 2. Build command: `npm run build`
 3. Publish directory: `dist`
 
@@ -95,5 +97,23 @@ netlify dev --target-port 4321
 
 ## Base de datos (migraciones y seed)
 - Ejecuta en Supabase UI el SQL de `supabase/migrations/0001_posts.sql`.
-- Opcional: importa `supabase/seed.csv` para contenido de prueba.
+- Opcional: importa `supabase/seed.csv` para contenido de prueba (20 posts).
+
+### Script SQL (21 posts demo)
+
+- Archivo: `supabase/demo_seed.sql`
+- Uso: abre Supabase → SQL Editor → Upload file → selecciona `supabase/demo_seed.sql` → Run.
+
+### Seed desde el proyecto (usando Service Role)
+
+1. Obtén la `SUPABASE_SERVICE_ROLE_KEY` en Supabase:
+   - Ve a Project Settings → API → sección Service Role key.
+   - Copia también `Project URL` (tu `SUPABASE_URL`).
+2. Exporta variables y ejecuta el seed:
+```bash
+export SUPABASE_URL="https://<your-project-ref>.supabase.co"
+export SUPABASE_SERVICE_ROLE_KEY="<service-role-key>"
+npm run seed
+```
+Esto hará upsert de 21 posts (incluye `hola-mundo`).
 

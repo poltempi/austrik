@@ -5,20 +5,26 @@ export function getSupabaseClient(): SupabaseClient | null {
   const supabaseUrl =
     import.meta.env.PUBLIC_SUPABASE_URL ||
     import.meta.env.PUBLIC_SUPABASE_DATABASE_URL ||
+    (import.meta as any).env?.NEXT_PUBLIC_SUPABASE_URL ||
+    (import.meta as any).env?.NEXT_PUBLIC_SUPABASE_DATABASE_URL ||
     import.meta.env.SUPABASE_URL ||
     import.meta.env.SUPABASE_DATABASE_URL ||
     (typeof process !== 'undefined' && (
       process.env.PUBLIC_SUPABASE_URL ||
       process.env.PUBLIC_SUPABASE_DATABASE_URL ||
+      process.env.NEXT_PUBLIC_SUPABASE_URL ||
+      process.env.NEXT_PUBLIC_SUPABASE_DATABASE_URL ||
       process.env.SUPABASE_URL ||
       process.env.SUPABASE_DATABASE_URL
     ));
   const supabaseAnonKey =
     import.meta.env.PUBLIC_SUPABASE_ANON_KEY ||
+    (import.meta as any).env?.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
     import.meta.env.SUPABASE_ANON_KEY ||
     import.meta.env.SUPABASE_KEY ||
     (typeof process !== 'undefined' && (
       process.env.PUBLIC_SUPABASE_ANON_KEY ||
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
       process.env.SUPABASE_ANON_KEY ||
       process.env.SUPABASE_KEY
     ));
