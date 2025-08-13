@@ -29,7 +29,11 @@ export async function fetchAllPosts(): Promise<BlogPostSummary[]> {
       console.error('Supabase error (fetchAllPosts):', error.message);
       return [];
     }
-    return data ?? [];
+    const mapped = (data ?? []).map((p) => ({
+      ...p,
+      cover_image_url: p.cover_image_url || '/demo-cover.svg'
+    }));
+    return mapped;
   } catch (err) {
     console.error('fetchAllPosts failed:', err);
     return [];
@@ -57,7 +61,7 @@ export async function fetchPostBySlug(slug: string): Promise<BlogPost & { conten
     if (!post) return null;
 
     const content_html = marked.parse(post.content_md ?? '');
-    return { ...post, content_html };
+    return { ...post, cover_image_url: post.cover_image_url || '/demo-cover.svg', content_html };
   } catch (err) {
     console.error('fetchPostBySlug failed:', err);
     return null;
