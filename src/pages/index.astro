@@ -29,8 +29,8 @@ try {
         const smallB = hero[3];
         return (
           <>
-            {main && (
-              <a class="hero-main" href={`/posts/${main.slug}/`}>
+                {main && (
+              <a class="hero-main" href={`/${main.slug}`}>
                 <figure>
                   <img src={main.cover_image_url ?? '/demo-cover.svg'} alt={main.title} loading="eager" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
                   <figcaption>
@@ -41,7 +41,7 @@ try {
               </a>
             )}
             {sideLarge && (
-              <a class="hero-side-large" href={`/posts/${sideLarge.slug}/`}>
+              <a class="hero-side-large" href={`/${sideLarge.slug}`}>
                 <figure>
                   <img src={sideLarge.cover_image_url ?? '/demo-cover.svg'} alt={sideLarge.title} loading="lazy" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
                   <figcaption>
@@ -54,7 +54,7 @@ try {
             {(smallA || smallB) && (
               <div class="hero-side-small">
                 {smallA && (
-                  <a class="hero-small" href={`/posts/${smallA.slug}/`}>
+                  <a class="hero-small" href={`/${smallA.slug}`}>
                     <figure>
                       <img src={smallA.cover_image_url ?? '/demo-cover.svg'} alt={smallA.title} loading="lazy" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
                       <figcaption>
@@ -64,7 +64,7 @@ try {
                   </a>
                 )}
                 {smallB && (
-                  <a class="hero-small" href={`/posts/${smallB.slug}/`}>
+                  <a class="hero-small" href={`/${smallB.slug}`}>
                     <figure>
                       <img src={smallB.cover_image_url ?? '/demo-cover.svg'} alt={smallB.title} loading="lazy" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
                       <figcaption>
@@ -97,7 +97,7 @@ try {
                 {slides.map((group, idx) => (
                   <div class="slide" data-index={String(idx)}>
                     {group.map((p) => (
-                      <a class="card" href={`/posts/${p.slug}/`}>
+                      <a class="card" href={`/${p.slug}`}>
                         <figure>
                           <img src={p.cover_image_url ?? '/demo-cover.svg'} alt={p.title} loading="lazy" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
                           <figcaption>

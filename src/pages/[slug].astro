@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { fetchPostBySlug } from "../services/posts";
+
+const { slug } = Astro.params;
+
+if (!slug) {
+  return Astro.redirect('/', 302);
+}
+
+Astro.response.headers.set('Cache-Control', 'no-store, max-age=0');
+
+let post = null as Awaited<ReturnType<typeof fetchPostBySlug>>;
+try {
+  post = await fetchPostBySlug(slug);
+} catch (e) {
+  console.error('Post fetch error:', e);
+  post = null;
+}
+
+if (!post) {
+  return new Response('Not Found', { status: 404 });
+}
+---
+
+<BaseLayout title={post.title} description={post.excerpt ?? post.title} image={post.cover_image_url ?? '/demo-cover.svg'}>
+  <article>
+    <h1 style="margin-top:0">{post.title}</h1>
+    {post.published_at && <small style="color:#6b7280;">{new Date(post.published_at).toLocaleDateString('es')}</small>}
+    {post.cover_image_url && (
+      <img src={post.cover_image_url} alt={post.title} style="width:100%; height:auto; border-radius:8px; margin:1rem 0;" loading="lazy" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
+    )}
+    <div class="content" set:html={post.content_html} />
+  </article>
+  <style>
+    .content :global(img) { max-width: 100%; height: auto; }
+    .content :global(pre) { background: #0b1021; color: #e5e7eb; padding: 1rem; overflow: auto; border-radius: 8px; }
+    .content :global(code) { background: #f3f4f6; padding: 0 .25rem; border-radius: 4px; }
+  </style>
+</BaseLayout>
+
+

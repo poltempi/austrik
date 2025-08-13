@@ -6,7 +6,7 @@ export const GET: APIRoute = async ({ site }) => {
 
   const items = posts
     .map((p) => {
-      const url = new URL(`/posts/${p.slug}/`, site ?? 'https://example.com');
+      const url = new URL(`/${p.slug}/`, site ?? 'https://example.com');
       return `
       <item>
         <title><![CDATA[${p.title}]]></title>
