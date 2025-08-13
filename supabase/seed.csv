@@ -1,23 +1,22 @@
-slug,title,excerpt,content_md,cover_image_url,published_at
-hola-mundo,Hola Mundo,Primer post de ejemplo,"# Hola Mundo\n\nEste es un post de **ejemplo** en Markdown.",,2025-01-01T10:00:00Z
-post-1,Post 1,Extracto del post 1,"# Post 1\n\nContenido de ejemplo para el post 1.",,2025-01-02T10:00:00Z
-post-2,Post 2,Extracto del post 2,"# Post 2\n\nContenido de ejemplo para el post 2.",,2025-01-03T10:00:00Z
-post-3,Post 3,Extracto del post 3,"# Post 3\n\nContenido de ejemplo para el post 3.",,2025-01-04T10:00:00Z
-post-4,Post 4,Extracto del post 4,"# Post 4\n\nContenido de ejemplo para el post 4.",,2025-01-05T10:00:00Z
-post-5,Post 5,Extracto del post 5,"# Post 5\n\nContenido de ejemplo para el post 5.",,2025-01-06T10:00:00Z
-post-6,Post 6,Extracto del post 6,"# Post 6\n\nContenido de ejemplo para el post 6.",,2025-01-07T10:00:00Z
-post-7,Post 7,Extracto del post 7,"# Post 7\n\nContenido de ejemplo para el post 7.",,2025-01-08T10:00:00Z
-post-8,Post 8,Extracto del post 8,"# Post 8\n\nContenido de ejemplo para el post 8.",,2025-01-09T10:00:00Z
-post-9,Post 9,Extracto del post 9,"# Post 9\n\nContenido de ejemplo para el post 9.",,2025-01-10T10:00:00Z
-post-10,Post 10,Extracto del post 10,"# Post 10\n\nContenido de ejemplo para el post 10.",,2025-01-11T10:00:00Z
-post-11,Post 11,Extracto del post 11,"# Post 11\n\nContenido de ejemplo para el post 11.",,2025-01-12T10:00:00Z
-post-12,Post 12,Extracto del post 12,"# Post 12\n\nContenido de ejemplo para el post 12.",,2025-01-13T10:00:00Z
-post-13,Post 13,Extracto del post 13,"# Post 13\n\nContenido de ejemplo para el post 13.",,2025-01-14T10:00:00Z
-post-14,Post 14,Extracto del post 14,"# Post 14\n\nContenido de ejemplo para el post 14.",,2025-01-15T10:00:00Z
-post-15,Post 15,Extracto del post 15,"# Post 15\n\nContenido de ejemplo para el post 15.",,2025-01-16T10:00:00Z
-post-16,Post 16,Extracto del post 16,"# Post 16\n\nContenido de ejemplo para el post 16.",,2025-01-17T10:00:00Z
-post-17,Post 17,Extracto del post 17,"# Post 17\n\nContenido de ejemplo para el post 17.",,2025-01-18T10:00:00Z
-post-18,Post 18,Extracto del post 18,"# Post 18\n\nContenido de ejemplo para el post 18.",,2025-01-19T10:00:00Z
-post-19,Post 19,Extracto del post 19,"# Post 19\n\nContenido de ejemplo para el post 19.",,2025-01-20T10:00:00Z
-post-20,Post 20,Extracto del post 20,"# Post 20\n\nContenido de ejemplo para el post 20.",,2025-01-21T10:00:00Z
+slug,title,excerpt,content_md,cover_image_url,published_at,category
+unlocking-your-mind-how-shifting-your-perspective-boosts-creativity,Unlocking Your Mind: How Shifting Your Perspective Boosts Creativity.,Practical notes on changing perspective to spark ideas.,"# Unlocking Your Mind\n\nChanging how we frame a problem often changes the solution.",https://source.unsplash.com/1600x900/?creativity,brain,ideas,2025-02-01T10:00:00Z,Mindset
+the-power-of-reframing-turning-challenges-into-opportunities,The Power of Reframing: Turning Challenges into Opportunities.,Reframing tough problems to uncover better options.,"# The Power of Reframing\n\nA practical guide with real examples.",https://source.unsplash.com/1600x900/?mindset,opportunity,2025-02-02T10:00:00Z,Mindset
+a-shift-in-perspective-how-empathy-can-transform-relationships,A Shift in Perspective: How Empathy Can Transform Relationships.,Empathy as a tool to reframe everyday conflicts.,"# Empathy\n\nSeeing the situation from the other side often changes the next step.",https://source.unsplash.com/1600x900/?empathy,people,2025-02-03T10:00:00Z,Mindset
+navigating-change-why-a-growth-mindset-matters,Navigating Change: Why a Growth Mindset Matters.,Growth mindset to adapt faster with less stress.,"# Growth Mindset\n\nSmall practice beats big theory.",https://source.unsplash.com/1600x900/?growth,mindset,2025-02-04T10:00:00Z,Mindset
+mental-models-tools-for-clear-and-effective-thinking,Mental Models: Tools for Clear and Effective Thinking.,Using models to reason better under uncertainty.,"# Mental Models\n\nBorrow and adapt proven patterns.",https://source.unsplash.com/1600x900/?strategy,thinking,2025-02-05T10:00:00Z,Mindset
+strategies-to-broaden-your-perspective-and-see-the-big-picture,Strategies to Broaden Your Perspective and See the Big Picture.,Tools to avoid tunnel vision.,"# Big Picture\n\nZoom out before you zoom in.",https://source.unsplash.com/1600x900/?horizon,panorama,2025-02-06T10:00:00Z,Mindset
+the-art-of-letting-go-how-changing-your-perspective-reduces-stress,The Art of Letting Go: How Changing Your Perspective Reduces Stress.,Letting go as a performance tool.,"# Letting Go\n\nRelease to move forward.",https://source.unsplash.com/1600x900/?calm,meditation,2025-02-07T10:00:00Z,Mindset
+disruptive-thinking-how-to-adopt-an-innovators-perspective,Disruptive Thinking: How to Adopt an Innovator's Perspective.,Invent like a beginner, execute like a pro.,"# Disruptive Thinking\n\nBreak patterns safely.",https://source.unsplash.com/1600x900/?innovation,lightbulb,2025-02-08T10:00:00Z,Mindset
+embracing-radical-ideas-and-stepping-outside-the-box,Embracing Radical Ideas and Stepping Outside the Box.,When to go bold and how to de‑risk.,"# Radical Ideas\n\nThink different, test fast.",https://source.unsplash.com/1600x900/?abstract,color,2025-02-09T10:00:00Z,Mindset
+adopting-a-long-term-perspective-in-decision-making,Adopting a Long-Term Perspective in Decision-Making.,Avoid short‑termism.,"# Long Term\n\nDecide for the future you want.",https://source.unsplash.com/1600x900/?mountain,trail,2025-02-10T10:00:00Z,Mindset
+a-guide-to-blepharoplasty-eyelid-surgery,A Guide to Blepharoplasty (Eyelid Surgery).,Basics, risks and recovery.,"# Blepharoplasty\n\nPlain‑language overview.",https://source.unsplash.com/1600x900/?eyelids,clinic,2025-02-11T10:00:00Z,Health
+a-guide-to-pdo-thread-lifts,A Guide to PDO Thread Lifts.,What to expect and typical results.,"# PDO Threads\n\nKey questions to ask.",https://source.unsplash.com/1600x900/?aesthetics,dermatology,2025-02-12T10:00:00Z,Health
+laser-eye-surgery-options-and-offers,Laser Eye Surgery: Options and Offers.,Comparing options and candidacy.,"# Laser Eye Surgery\n\nTalk to your ophthalmologist.",https://source.unsplash.com/1600x900/?laser,ophthalmology,2025-02-13T10:00:00Z,Health
+effective-treatments-for-macular-degeneration,Effective Treatments for Macular Degeneration.,Current standards of care.,"# Macular Degeneration\n\nOptions and follow‑up.",https://source.unsplash.com/1600x900/?eye,retina,2025-02-14T10:00:00Z,Health
+osteoporosis-effective-treatments-and-breakthroughs,Osteoporosis: Effective Treatments and Breakthroughs.,Prevention and treatment basics.,"# Osteoporosis\n\nBone health matters.",https://source.unsplash.com/1600x900/?bone,health,2025-02-15T10:00:00Z,Health
+understanding-ductal-carcinoma-types-treatments-and-costs,Understanding Ductal Carcinoma: Types, Treatments, and Costs.,Plain‑language summary.,"# Ductal Carcinoma\n\nTalk with your oncologist.",https://source.unsplash.com/1600x900/?oncology,clinic,2025-02-16T10:00:00Z,Health
+exploring-alzheimers-treatment-understanding-and-managing-the-disease,Exploring Alzheimer's Treatment: Understanding and Managing the Disease.,What families ask most.,"# Alzheimer's\n\nCare and options overview.",https://source.unsplash.com/1600x900/?alzheimer,care,2025-02-17T10:00:00Z,Health
+a-guide-to-stomach-cancer-treatments,A Guide to Stomach Cancer Treatments.,First‑line and second‑line options.,"# Stomach Cancer\n\nDiscuss screening and follow‑up.",https://source.unsplash.com/1600x900/?oncology,hospital,2025-02-18T10:00:00Z,Health
+metastatic-prostate-cancer-treatment,Metastatic Prostate Cancer Treatment.,Latest approaches and trials.,"# Prostate Cancer\n\nAsk about side effects.",https://source.unsplash.com/1600x900/?hospital,doctor,2025-02-19T10:00:00Z,Health
+understanding-gout-and-its-effective-treatments,Understanding Gout and Its Effective Treatments.,What actually works and when.,"# Gout\n\nLifestyle + medicine overview.",https://source.unsplash.com/1600x900/?gout,foot,pain,2025-02-20T10:00:00Z,Health
 
