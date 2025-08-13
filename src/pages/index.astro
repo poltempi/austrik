@@ -24,7 +24,7 @@ try {
   )}
 
   {posts.length > 0 && (
-    <section class="hero-grid three-up">
+    <section class="tc-hero">
       {(() => {
         const hero = posts.slice(0, 4);
         const main = hero[0];
@@ -32,54 +32,68 @@ try {
         const smallA = hero[2];
         const smallB = hero[3];
         return (
-          <>
-                {main && (
-              <a class="hero-main" href={`/${main.slug}`}>
-                <figure>
-                  <img src={main.cover_image_url ?? '/demo-cover.svg'} alt={main.title} loading="eager" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
-                  <figcaption>
-                    <h2>{main.title}</h2>
-                    {main.excerpt && <p>{main.excerpt}</p>}
-                  </figcaption>
-                </figure>
-              </a>
-            )}
-            {sideLarge && (
-              <a class="hero-side-large" href={`/${sideLarge.slug}`}>
-                <figure>
-                  <img src={sideLarge.cover_image_url ?? '/demo-cover.svg'} alt={sideLarge.title} loading="lazy" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
-                  <figcaption>
-                    <h3>{sideLarge.title}</h3>
-                    {sideLarge.excerpt && <p>{sideLarge.excerpt}</p>}
-                  </figcaption>
-                </figure>
-              </a>
-            )}
-            {(smallA || smallB) && (
-              <div class="hero-side-small">
-                {smallA && (
-                  <a class="hero-small" href={`/${smallA.slug}`}>
+          <div class="tc-hero-grid">
+            <div class="tc-hero-left">
+              {main && (
+                <a class="hero-main" href={`/${main.slug}`}>
+                  <figure>
+                    <img src={main.cover_image_url ?? '/demo-cover.svg'} alt={main.title} loading="eager" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
+                    <figcaption>
+                      <h2>{main.title}</h2>
+                      {main.excerpt && <p>{main.excerpt}</p>}
+                    </figcaption>
+                  </figure>
+                </a>
+              )}
+              <div class="tc-right-col">
+                {sideLarge && (
+                  <a class="hero-side-large" href={`/${sideLarge.slug}`}>
                     <figure>
-                      <img src={smallA.cover_image_url ?? '/demo-cover.svg'} alt={smallA.title} loading="lazy" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
+                      <img src={sideLarge.cover_image_url ?? '/demo-cover.svg'} alt={sideLarge.title} loading="lazy" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
                       <figcaption>
-                        <h4>{smallA.title}</h4>
+                        <h3>{sideLarge.title}</h3>
+                        {sideLarge.excerpt && <p>{sideLarge.excerpt}</p>}
                       </figcaption>
                     </figure>
                   </a>
                 )}
-                {smallB && (
-                  <a class="hero-small" href={`/${smallB.slug}`}>
-                    <figure>
-                      <img src={smallB.cover_image_url ?? '/demo-cover.svg'} alt={smallB.title} loading="lazy" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
-                      <figcaption>
-                        <h4>{smallB.title}</h4>
-                      </figcaption>
-                    </figure>
-                  </a>
+                {(smallA || smallB) && (
+                  <div class="hero-side-small">
+                    {smallA && (
+                      <a class="hero-small" href={`/${smallA.slug}`}>
+                        <figure>
+                          <img src={smallA.cover_image_url ?? '/demo-cover.svg'} alt={smallA.title} loading="lazy" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
+                          <figcaption>
+                            <h4>{smallA.title}</h4>
+                          </figcaption>
+                        </figure>
+                      </a>
+                    )}
+                    {smallB && (
+                      <a class="hero-small" href={`/${smallB.slug}`}>
+                        <figure>
+                          <img src={smallB.cover_image_url ?? '/demo-cover.svg'} alt={smallB.title} loading="lazy" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
+                          <figcaption>
+                            <h4>{smallB.title}</h4>
+                          </figcaption>
+                        </figure>
+                      </a>
+                    )}
+                  </div>
                 )}
               </div>
-            )}
-          </>
+            </div>
+            <aside class="tc-hero-right">
+              <h3>Top Headlines</h3>
+              <ul>
+                {posts.slice(0, 6).map((p) => (
+                  <li>
+                    <a href={`/${p.slug}`}>{p.title}</a>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          </div>
         );
       })()}
     </section>
@@ -126,16 +140,14 @@ try {
     .blog-title { text-align:center; margin: 1rem 0 1.5rem 0; }
     .blog-title h1 { margin: 0; font-size: 2.25rem; }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr; /* main left, column right */
-      grid-template-rows: auto auto;  /* right column: two stacked */
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .hero-main { grid-column: 1 / 2; grid-row: 1 / 3; }
-    .hero-side-large { grid-column: 2 / 3; grid-row: 1 / 2; }
-    .hero-side-small { grid-column: 2 / 3; grid-row: 2 / 3; display: grid; grid-template-rows: 1fr 1fr; gap: 1rem; }
+    .tc-hero-grid { display:grid; grid-template-columns: 2fr 1fr; gap:1rem; }
+    .tc-hero-left { display:grid; grid-template-columns: 2fr 1fr; grid-template-rows: auto auto; gap:1rem; }
+    .tc-right-col { grid-column: 2 / 3; grid-row: 1 / 3; display:grid; grid-template-rows: 1fr 1fr; gap:1rem; }
+    .tc-hero-right { border-left: 1px solid #e5e7eb; padding-left: 1rem; }
+    .tc-hero-right h3 { margin: 0 0 .5rem 0; }
+    .tc-hero-right ul { list-style: none; padding: 0; margin: 0; display:grid; gap:.5rem; }
+    .tc-hero-right li { border-bottom:1px solid #e5e7eb; padding:.5rem 0; }
+    .tc-hero-right a { text-decoration:none; color:#111827; }
 
     .hero-main figure, .hero-side-large figure, .hero-small figure { position: relative; width: 100%; height: 100%; margin: 0; overflow: hidden; border-radius: 12px; }
     .hero-main img, .hero-side-large img, .hero-small img { width: 100%; height: 100%; object-fit: cover; display: block; }
