@@ -1,26 +1,30 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { fetchAllPosts } from "../services/posts";
+import { fetchAllPosts, fetchCategories } from "../services/posts";
 
 Astro.response.headers.set('Cache-Control', 'no-store, max-age=0');
 
 let posts = [] as Awaited<ReturnType<typeof fetchAllPosts>>;
+let categories = [] as Awaited<ReturnType<typeof fetchCategories>>;
 try {
   posts = await fetchAllPosts();
+  categories = await fetchCategories();
 } catch (e) {
   console.error('Home fetchAllPosts error:', e);
   posts = [];
 }
 ---
 
-<BaseLayout title="Austrik Blog" description="Noticias y artículos de Austrik">
-  <h1 style="margin-top:0">Austrik Blog</h1>
+<BaseLayout title="Austrik Blog" description="Noticias y artículos de Austrik" categories={categories}>
+  <div class="blog-title">
+    <h1>Austrik Blog</h1>
+  </div>
   {posts.length === 0 && (
     <p>No hay posts todavía o hay un problema temporal con la conexión a datos.</p>
   )}
 
   {posts.length > 0 && (
-    <section class="hero-grid">
+    <section class="hero-grid three-up">
       {(() => {
         const hero = posts.slice(0, 4);
         const main = hero[0];
@@ -119,10 +123,13 @@ try {
   )}
 
   <style>
+    .blog-title { text-align:center; margin: 1rem 0 1.5rem 0; }
+    .blog-title h1 { margin: 0; font-size: 2.25rem; }
+
     .hero-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr;
-      grid-template-rows: auto auto;
+      grid-template-columns: 2fr 1fr; /* main left, column right */
+      grid-template-rows: auto auto;  /* right column: two stacked */
       gap: 1rem;
       margin-bottom: 1.5rem;
     }
