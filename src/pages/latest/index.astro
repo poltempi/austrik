@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { fetchAllPosts } from "../../services/posts";
+
+Astro.response.headers.set('Cache-Control', 'no-store, max-age=0');
+
+const posts = await fetchAllPosts();
+---
+
+<BaseLayout title="Latest · Austrik" description="Últimas publicaciones">
+  <h1 style="margin-top:0">Latest</h1>
+  {posts.length === 0 ? (
+    <p>No hay publicaciones recientes.</p>
+  ) : (
+    <ul style="list-style:none; padding:0; display:grid; gap:1rem; margin-top:1rem;">
+      {posts.map((p) => (
+        <li>
+          <a href={`/${p.slug}`} style="text-decoration:none; color:inherit;">
+            <article style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; display:grid; grid-template-columns:200px 1fr; gap:1rem;">
+              <img src={p.cover_image_url ?? '/demo-cover.svg'} alt={p.title} loading="lazy" style="width:200px; height:140px; object-fit:cover;" onerror="this.onerror=null;this.src='/demo-cover.svg'" />
+              <div style="padding: .75rem 1rem;">
+                <h2 style="margin:.25rem 0 .25rem 0; font-size:1.125rem;">{p.title}</h2>
+                {p.excerpt && <p style="margin:0; color:#4b5563;">{p.excerpt}</p>}
+                {p.published_at && <small style="color:#6b7280;">{new Date(p.published_at).toLocaleDateString('es')}</small>}
+              </div>
+            </article>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</BaseLayout>
+
+

@@ -125,6 +125,16 @@ function buildPosts() {
 }
 
 async function main() {
+  // Ensure categories are present
+  const categories = [
+    { name: 'Health', description: 'Articles about physical well-being, treatments for diseases, medical conditions, and aesthetic procedures.' },
+    { name: 'Mindset', description: 'Content focused on personal development, mental tools, perspective shifts, and inner growth.' }
+  ];
+  try { await supabase.from('categories').upsert(categories, { onConflict: 'name' }); } catch {}
+  const { data: catRows } = await supabase.from('categories').select('id, name');
+  const healthId = catRows?.find((c) => c.name === 'Health')?.id || null;
+  const mindsetId = catRows?.find((c) => c.name === 'Mindset')?.id || null;
+
   if (getEnv('PURGE_OLD_SAMPLE') === '1') {
     await supabase.from('posts').delete().ilike('slug', 'post-%');
     await supabase.from('posts').delete().eq('slug', 'hola-mundo');
@@ -132,9 +142,13 @@ async function main() {
   }
 
   const posts = buildPosts();
+  const postsWithCategory = posts.map((p) => {
+    const isHealth = /(blepharoplasty|pdo|laser eye|macular|osteoporosis|carcinoma|alzheimer|stomach cancer|prostate|gout)/i.test(p.title);
+    return { ...p, category_id: isHealth ? healthId : mindsetId };
+  });
   const { error, count } = await supabase
     .from('posts')
-    .upsert(posts, { onConflict: 'slug', ignoreDuplicates: false, count: 'exact' });
+    .upsert(postsWithCategory, { onConflict: 'slug', ignoreDuplicates: false, count: 'exact' });
 
   if (error) {
     console.error('Seed failed:', error);
