@@ -100,6 +100,17 @@ export async function fetchPostsByCategoryId(categoryId: string): Promise<BlogPo
       .select('id, slug, title, excerpt, published_at, cover_image_url, category_id, category_name')
       .eq('category_id', categoryId)
       .order('published_at', { ascending: false });
+    if (error) {
+      console.error('Supabase error (fetchPostsByCategoryId):', error.message);
+      return [];
+    }
+    return (data ?? []).map((p) => ({ ...p, cover_image_url: p.cover_image_url || '/demo-cover.svg' }));
+  } catch (e) {
+    console.error('fetchPostsByCategoryId failed:', e);
+    return [];
+  }
+}
+
 export async function fetchPostsByCategoryName(categoryName: string): Promise<BlogPostSummary[]> {
   try {
     const supabase = getSupabaseClient();
@@ -116,16 +127,6 @@ export async function fetchPostsByCategoryName(categoryName: string): Promise<Bl
     return (data ?? []).map((p: any) => ({ ...p, cover_image_url: p.cover_image_url || '/demo-cover.svg' }));
   } catch (e) {
     console.error('fetchPostsByCategoryName failed:', e);
-    return [];
-  }
-}
-    if (error) {
-      console.error('Supabase error (fetchPostsByCategoryId):', error.message);
-      return [];
-    }
-    return (data ?? []).map((p) => ({ ...p, cover_image_url: p.cover_image_url || '/demo-cover.svg' }));
-  } catch (e) {
-    console.error('fetchPostsByCategoryId failed:', e);
     return [];
   }
 }
